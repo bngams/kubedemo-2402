@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: whoami-svc
+  namespace: whoami
+spec:
+  type: ClusterIP
+  selector:
+    name: whoami
+  ports:
+    - port: 80
+      # By default and for convenience, the `targetPort` is set to
+      # the same value as the `port` field.
+      targetPort: 80
