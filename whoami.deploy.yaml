@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: whoami
+  name: whoami-deploy
+  labels:
+    name: whoami
+spec:
+  strategy:
+   type: RollingUpdate
+   rollingUpdate:
+     maxUnavailable: 1
+  replicas: 1
+  selector:
+    matchLabels:
+      name: whoami
+  template:
+    metadata:
+      name: whoami
+      namespace: whoami
+      labels:
+        name: whoami
+        tier: app
+    spec:
+      containers:
+      - name: whoami
+        image: containous/whoami
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
